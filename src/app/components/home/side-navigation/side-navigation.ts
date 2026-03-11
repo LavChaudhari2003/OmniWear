@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Category } from '../types/category';
 import { CategoryService } from '../services/category';
+import { CategoriesStoreItem } from '../services/categories.storeItems';
 @Component({
   selector: 'app-side-navigation',
   imports: [FontAwesomeModule],
@@ -11,15 +12,12 @@ import { CategoryService } from '../services/category';
 })
 export class SideNavigation {
   faAngleDown = faAngleDown;
-  categories: Category[] = [];
+  private categoryStore = inject(CategoriesStoreItem);
 
-  constructor(categoryService: CategoryService) {
-    this.categories = categoryService.getAllCategories();
-  }
-
+  readonly categories = this.categoryStore.categories;
 
   getCategories(parentCategoryId: number | null): Category[] {
-    return this.categories.filter(category => {
+    return this.categories().filter(category => {
       if (parentCategoryId === null) {
         return category.parent_category_id == null;
       }
