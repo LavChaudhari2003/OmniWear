@@ -1,20 +1,28 @@
 <div class="bg-gray-800 border-t border-gray-600">
     <ul class="flex">
         <li class="list-none inline-block mx-4 py-1.5 h-10 releative group">
-            <a href="/home" class="text-white text-sm font-bold no-underline pb-0.5 relative">Home
+            <a routerLink="/home/products" class="text-white text-sm font-bold no-underline pb-0.5 relative">Home
                 <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-50 transition-all group-hover:w-full"></span>
             </a>
         </li>
 
+        @if (displayOptions()) {
+        <ng-container>
+            @for (category of categoryStore.topLevelCategories(); track category.id) {
 
-        @for (category of categoryStore.topLevelCategories(); track category.id) {
+            <li class="list-none inline-block mx-4 py-1.5 h-10 releative group">
+                <a (click)="onClickCategory(category)"
+                    class="text-white text-sm font-bold no-underline pb-0.5 relative">{{category.category}}
+                    <span
+                        class="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-50 transition-all group-hover:w-full"></span>
+                </a>
+            </li>
 
-        <li class="list-none inline-block mx-4 py-1.5 h-10 releative group">
-            <a (click)="onClickCategory(category)" class="text-white text-sm font-bold no-underline pb-0.5 relative">{{category.category}}
-                <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-50 transition-all group-hover:w-full"></span>
-            </a>
-        </li>
+            }
+        </ng-container>
 
         }
+
+
     </ul>
 </div>

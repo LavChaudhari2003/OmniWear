@@ -1,20 +1,29 @@
 <div class="w-full shadow-lg shadow-gray-500/50 bg-gray-900">
-    <div class="flex items-center">
+    <div class="flex items-center w-full">
         <div class="text-white ml-2 p-3 w-[23%]">
             <h1 class="text-xl font-bold">OmniWear</h1>
         </div>
-        <div class="p-0 my-4 w-[50%] h-[2.5rem] bg-white flex items-center ">
-            <select #categoryOptions class="w-auto bg-gray-300 h-full border-none font-semibold px-2 pr-5">
-                
-                @for (item of categoryStore.topLevelCategories(); track item.id) {
+
+        <div class="w-[50%]">
+            @if (displaySearchbar()) {
+            <div class="p-0 my-4 h-10 bg-white flex items-center ">
+                <select #categoryOptions class="w-auto bg-gray-300 h-full border-none font-semibold px-2 pr-5">
+
+                    @for (item of categoryStore.topLevelCategories(); track item.id) {
                     <option [value]="item.id">{{item.category}}</option>
-                }
-            </select>
-            <input #keyword  placeholder="Search..." class="w-[90%] h-full inline-block border-none outline-none px-3">
-            <button  (click)="onClickSearch(keyword.value,categoryOptions.value)"  class="w-[10%] h-10 border-none bg-gray-300 flex justify-center items-center">
-                <fa-icon [icon]="faSearch"></fa-icon>
-            </button>
+                    }
+                </select>
+                <input #keyword placeholder="Search..." class="w-[90%] h-full inline-block border-none outline-none px-3">
+                <button (click)="onClickSearch(keyword.value,categoryOptions.value)"
+                    class="w-[10%] h-10 border-none bg-gray-300 flex justify-center items-center">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                </button>
+            </div>
+            }
         </div>
+
+
+
 
         <div class="flex items-center w-[27%] gap-6 justify-end h-full">
             <div class="flex items-center gap-2 text-white ">
