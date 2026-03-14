@@ -5,17 +5,21 @@ import { Product } from '../types/product.type';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { CartStoreItem } from '../services/cart/cart.storeItem';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-product-details',
-  imports: [Ratings,CommonModule],
+  imports: [Ratings,CommonModule,FontAwesomeModule],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
 export class ProductDetails {
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
-
+  private readonly cart = inject(CartStoreItem);
   readonly product = signal<Product | null>(null);
+  faShoppingCart = faShoppingCart;
 
   constructor() {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -29,6 +33,11 @@ export class ProductDetails {
         });
         return;
     }
+  }
 
+  addtoCart(){
+    if(this.product()){
+      this.cart.addProduct(this.product()!);
+    }
   }
 }

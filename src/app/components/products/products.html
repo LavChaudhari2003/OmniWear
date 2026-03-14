@@ -25,8 +25,16 @@
             </a>
             <p class="text-base font-normal mt-1">{{ product.price | currency }}</p>
             @if (product.ratings || 0 > 0) {
-            <app-ratings [score]="product.ratings || 0"></app-ratings>
+            <ng-container>
+                <app-ratings [score]="product.ratings || 0"></app-ratings>
+            </ng-container>
             }
+
+            <BUtton class="flex items-center justify-center gap-2 mt-4 w-full py-2 text-white bg-black rounded-lg transition-colors cursor-pointer hover:bg-gray-800 hover:text-white"
+                (click)="addtoCart(product)">
+                <fa-icon [icon]="faShoppingCart" class="text-lg"></fa-icon>
+                <Span class="text-sm font-medium">Add to Cart</Span>
+            </BUtton>
 
         </div>
     </div>

@@ -4,8 +4,9 @@ import { Ratings } from '../ratings/ratings';
 import { Product } from '../home/types/product.type';
 import { ProductStoreItem } from '../home/services/category/product/products.storeItem';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import { faBoxOpen,faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from "@angular/router";
+import { CartStoreItem } from '../home/services/cart/cart.storeItem';
 @Component({
   selector: 'app-products',
   imports: [CommonModule, Ratings, FontAwesomeModule, RouterLink],
@@ -13,9 +14,11 @@ import { RouterLink } from "@angular/router";
   styleUrl: './products.css',
 })
 export class Products {
-  products:Product[] = [];
   faBoxOpen = faBoxOpen;
-  constructor(public productStore: ProductStoreItem) {
-    
+  faShoppingCart = faShoppingCart;
+  constructor(public productStore: ProductStoreItem, private cartStore: CartStoreItem) {}
+
+  addtoCart(product: Product){
+    this.cartStore.addProduct(product);
   }
 }

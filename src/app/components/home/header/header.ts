@@ -5,6 +5,7 @@ import { CategoriesStoreItem } from '../services/category/categories.storeItems'
 import { searchKeyword } from '../types/searchKeyword.type';
 import { Router,NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { CartStoreItem } from '../services/cart/cart.storeItem';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,7 @@ export class Header {
   readonly searchClicked = output<searchKeyword>();
 
 
-  constructor(public categoryStore: CategoriesStoreItem,private router: Router) {
+  constructor(public categoryStore: CategoriesStoreItem,private router: Router,public cart: CartStoreItem) {
     router.events.pipe(
         filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) =>{
@@ -34,5 +35,9 @@ export class Header {
 
   onClickSearch(keyword: string, categoryId: string) {
     this.searchClicked.emit({ keyword, categoryId: Number.parseInt(categoryId) });
+  }
+
+  navigateToCart() {
+    this.router.navigate(['/home/cart']);
   }
 }

@@ -3,6 +3,7 @@ import { Home } from './components/home/home';
 import { NotFound } from './components/not-found/not-found';
 import { ProductsGalery } from './components/home/products-galery/products-galery';
 import { ProductDetails } from './components/home/product-details/product-details';
+import { Cart } from './components/home/cart/cart';
 
 export const routes: Routes = [
     // {path:'home', component: Home},
@@ -19,6 +20,10 @@ export const routes: Routes = [
             {
                 path: "product/:id",
                 component:ProductDetails,
+            },
+            {
+                path: "cart",
+                component: Cart,
             }
         ]
 

@@ -7,17 +7,19 @@ import { ProductStoreItem } from './services/category/product/products.storeItem
 import { ProductService } from './services/category/product/products.service';
 import { searchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet } from '@angular/router';
+import { CartStoreItem } from './services/cart/cart.storeItem';
 @Component({
   selector: 'app-home',
   imports: [Header,CatagoryNavigation,RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.css',
-  providers:[CategoriesStoreItem,CategoryService,ProductStoreItem,ProductService]
+  providers:[CategoriesStoreItem,CategoryService,ProductStoreItem,ProductService,CartStoreItem]
 })
 export class Home {
   constructor(
     private readonly categoriesStoreItem: CategoriesStoreItem,
-    private readonly productStoreItem: ProductStoreItem
+    private readonly productStoreItem: ProductStoreItem,
+    private readonly cartStoreItem: CartStoreItem
   ) {
     this.categoriesStoreItem.loadCategories();
     this.productStoreItem.loadProducts();

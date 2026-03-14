@@ -18,5 +18,10 @@
     <div class="text-[1.5em] font-semibold text-gray-700">
       {{ product()?.product_description }}
     </div>
+    <BUtton class="flex item-center gap-3 bg-yellow-400 hover:bg-yellow-500
+    text-black font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow cursor-pointer" (click)="addtoCart()">
+      <fa-icon [icon]="faShoppingCart" class="text-lg"></fa-icon>
+      <Span class="text-lg">Add to Cart</Span>
+    </BUtton>
   </div>
 </div>
