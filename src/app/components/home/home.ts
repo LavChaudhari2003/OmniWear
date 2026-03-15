@@ -6,8 +6,9 @@ import { CategoriesStoreItem } from './services/category/categories.storeItems';
 import { ProductStoreItem } from './services/category/product/products.storeItem';
 import { ProductService } from './services/category/product/products.service';
 import { searchKeyword } from './types/searchKeyword.type';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router,NavigationEnd } from '@angular/router';
 import { CartStoreItem } from './services/cart/cart.storeItem';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   imports: [Header,CatagoryNavigation,RouterOutlet],
@@ -19,10 +20,19 @@ export class Home {
   constructor(
     private readonly categoriesStoreItem: CategoriesStoreItem,
     private readonly productStoreItem: ProductStoreItem,
-    private readonly cartStoreItem: CartStoreItem
+    private readonly cartStoreItem: CartStoreItem,
+    private readonly router: Router,
   ) {
     this.categoriesStoreItem.loadCategories();
     this.productStoreItem.loadProducts();
+
+    router.events.pipe(
+      filter((event)=> event instanceof NavigationEnd)
+    ).subscribe(event => {
+      if((event as NavigationEnd).url ==="/home"){
+        router.navigate(['/home/products']);
+      }
+    })
   }
 
   

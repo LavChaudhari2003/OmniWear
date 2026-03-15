@@ -52,5 +52,18 @@
         </div>
         }
     </div>
+    <!-- Cart Summary -->
+    <div class="w-full lg:w-[30%] h-fit bg-gray-50 p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Summary</h2>
+        <div class="text-large space-y-2">
+            <p class="text-gray-600">Cart Total: {{cartStore.cart().totalAmount | currency}}</p>
+            <p class="text-gray-600"> Charges:
+                <span class="font-semibold">Free</span>
+            </p>
+            <hr />
+            <p class="text-xl font-bold">Total: {{cartStore.cart().totalAmount | currency}}</p>
+             <button class="w-full mt-5 bg-gray-800 text-white py-2 rounded hover:bg-gray-900 transition cursor-pointer">CheckOut</button>
+        </div>
+    </div>
     }
 </ng-container>

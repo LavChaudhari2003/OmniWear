@@ -1,9 +1,22 @@
-import { computed, signal } from '@angular/core';
+import { computed, effect, signal } from '@angular/core';
 import { CartItem } from '../../types/cart.type';
 import { Product } from '../../types/product.type';
 
 export class CartStoreItem {
-    private readonly _products = signal<CartItem[]>([]);
+    private readonly _products = signal<CartItem[]>(this.loadFromSassion());
+
+    private readonly _saveEffect = effect(() => {
+        if (!this.hasSessionStorage()) {
+            return;
+        }
+
+        const products = this._products();
+        if (products.length > 0) {
+            sessionStorage.setItem('cart', JSON.stringify(products));
+        } else {
+            sessionStorage.removeItem('cart');
+        }
+    });
 
     readonly totalAmout = computed(() =>
         this._products().reduce((total, item) => total + item.amount, 0),
@@ -67,5 +80,24 @@ export class CartStoreItem {
         const updtaedItems = this._products().filter((item) => item.product.id !== cartItem.product.id);
 
         this._products.set(updtaedItems);
+    }
+
+    private hasSessionStorage(): boolean {
+        return globalThis.window?.sessionStorage !== undefined;
+    }
+
+    private loadFromSassion(): CartItem[] {
+        if (!this.hasSessionStorage()) {
+            return [];
+        }
+
+        const storedProducts = sessionStorage.getItem('cart');
+        try {
+            return storedProducts ? JSON.parse(storedProducts) : [];
+        } catch (error) {
+            console.error('Error parsing stored cart items:', error);
+            return [];
+
+        }
     }
 }

@@ -3,13 +3,13 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import {faSearch, faUserCircle,faHeart,faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import { CategoriesStoreItem } from '../services/category/categories.storeItems';
 import { searchKeyword } from '../types/searchKeyword.type';
-import { Router,NavigationEnd, RouterLink } from '@angular/router';
+import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CartStoreItem } from '../services/cart/cart.storeItem';
 
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -25,7 +25,7 @@ export class Header {
   readonly searchClicked = output<searchKeyword>();
 
 
-  constructor(public categoryStore: CategoriesStoreItem,private router: Router,public cart: CartStoreItem) {
+  constructor(public categoryStore: CategoriesStoreItem, private readonly router: Router,public cart: CartStoreItem) {
     router.events.pipe(
         filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) =>{
