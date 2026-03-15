@@ -52,22 +52,38 @@
         </div>
         }
         @if (isUserAuthenticated()) {
-        <div class="relative inline-block text-left">
-            <button (type="button" (click)="toggleDropdown()")
-                class="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-white font-medium rounded-md hover:bg-gray-800 transition text-base cursor-pointer">
-                <fa-icon [icon]="faUserCircle" class="text-[1.3rem]"></fa-icon>
-                Hi {{ username() }}
-                <fa-icon [icon]="faChevronDown"></fa-icon>
-            </button>
+        <div class="flex items-center w-[27%] gap-4 justify-end h-full">
+            <div class="relative inline-block text-left">
+                <button type="button" (click)="toggleDropdown()"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-white font-medium rounded-md hover:bg-gray-800 transition text-base cursor-pointer">
+                    <fa-icon [icon]="faUserCircle" class="text-[1.3rem]"></fa-icon>
+                    Hi {{ username() }}
+                    <fa-icon [icon]="faChevronDown"></fa-icon>
+                </button>
 
-            @if (dropdownVisible) {
-            <div class="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-md border border-gray-200 z-50">
-                <ul class="py-1 text-sm text-gray-700">
-                    <li class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
-                </ul>
+                @if (dropdownVisible) {
+                <div class="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-md border border-gray-200 z-50">
+                    <ul class="py-1 text-sm text-gray-700">
+                        <li class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            <a href="#" (click)="logout()"> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                }
             </div>
-            }
 
+            <div class="relative flex items-center p-2">
+                <button (click)="navigateToCart()" type="button"
+                    class="flex items-center justify-center text-white p-2 rounded-full bg-gray-700 hover:bg-gray-800 transition-colors cursor-pointer">
+                    <fa-icon [icon]="faShoppingCart" class="text-[1.3em]"></fa-icon>
+                </button>
+
+                @if (cart.cart() && cart.totalProducts() > 0) {
+                <span
+                    class="absolute -top-1 right-1 flex items-center justify-center text-[0.7rem] font-semibold text-white bg-amber-500 rounded-full w-5 h-5">{{
+                    cart.totalProducts() }}</span>
+                }
+            </div>
         </div>
         }
 

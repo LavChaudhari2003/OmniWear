@@ -73,4 +73,10 @@ export class Header {
   navigateToCart() {
     this.router.navigate(['/home/cart']);
   }
+
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/home/products']);
+  }
+
 }

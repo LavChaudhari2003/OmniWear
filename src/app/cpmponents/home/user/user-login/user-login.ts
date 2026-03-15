@@ -6,6 +6,7 @@ import { UserService } from '../../../../components/home/services/user/user';
 import { LoginToken } from '../../../../components/home/types/user.type';
 import { Location } from '@angular/common';
 import { error } from 'console';
+import e from 'express';
 @Component({
   selector: 'app-user-login',
   standalone: true,
@@ -52,6 +53,7 @@ export class UserLogin {
         this.userLoginForm.enable();
 
         if (response.token) {
+          response.user.email = this.email?.value; // Ensure email is set in user info
           this.userService.activateToken(response);
           this.alertType = 0;
           this.alertMessage = 'Login successful!';

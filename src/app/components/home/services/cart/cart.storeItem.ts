@@ -100,4 +100,12 @@ export class CartStoreItem {
 
         }
     }
+
+    clearCart(): void {
+        if (this.hasSessionStorage()) {
+            sessionStorage.removeItem('cart');
+        }
+
+        this._products.set([]);
+    }
 }
