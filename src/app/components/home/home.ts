@@ -9,12 +9,13 @@ import { searchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet, Router,NavigationEnd } from '@angular/router';
 import { CartStoreItem } from './services/cart/cart.storeItem';
 import { filter } from 'rxjs/operators';
+import { UserService } from './services/user/user';
 @Component({
   selector: 'app-home',
   imports: [Header,CatagoryNavigation,RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.css',
-  providers:[CategoriesStoreItem,CategoryService,ProductStoreItem,ProductService,CartStoreItem]
+  providers:[CategoriesStoreItem,CategoryService,ProductStoreItem,ProductService,CartStoreItem,UserService]
 })
 export class Home {
   constructor(
@@ -22,6 +23,7 @@ export class Home {
     private readonly productStoreItem: ProductStoreItem,
     private readonly cartStoreItem: CartStoreItem,
     private readonly router: Router,
+    private readonly userService: UserService,
   ) {
     this.categoriesStoreItem.loadCategories();
     this.productStoreItem.loadProducts();

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
-import { UserService } from '../../../../components/home/user/servises/user';
+import { UserService } from '../../../../components/home/services/user/user';
 import { User } from '../../../../components/home/types/user.type';
 import { NgClass } from '@angular/common';
 @Component({
@@ -8,7 +8,6 @@ import { NgClass } from '@angular/common';
   imports: [ReactiveFormsModule,NgClass],
   templateUrl: './user-signup.html',
   styleUrl: './user-signup.css',
-  providers: [UserService],
 })
 export class UserSignup {
   userSIgnupForm: FormGroup;

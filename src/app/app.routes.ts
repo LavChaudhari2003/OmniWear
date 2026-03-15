@@ -5,6 +5,7 @@ import { ProductsGalery } from './components/home/products-galery/products-galer
 import { ProductDetails } from './components/home/product-details/product-details';
 import { Cart } from './components/home/cart/cart';
 import { UserSignup } from './cpmponents/home/user/user-signup/user-signup';
+import { UserLogin } from './cpmponents/home/user/user-login/user-login';
 
 export const routes: Routes = [
     // {path:'home', component: Home},
@@ -29,6 +30,10 @@ export const routes: Routes = [
             {
                 path:"signup",
                 component: UserSignup,
+            },
+            {
+                path:"login",
+                component: UserLogin,
             }
         ]
 

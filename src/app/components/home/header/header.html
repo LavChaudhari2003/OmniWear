@@ -22,16 +22,17 @@
             }
         </div>
 
+        @if(!isUserAuthenticated()) {
         <div class="flex items-center w-[27%] gap-6 justify-end h-full">
             <div class="flex items-center gap-2 text-white">
                 <fa-icon [icon]="faUserCircle" class="text-[1.3em ]"></fa-icon>
                 <h5>
-                    <a routerLink="/home/signup" class="text-white no-underline hover:underline">Sign In / Join</a>
+                    <a routerLink="/home/login" class="text-white no-underline hover:underline">Sign In / Join</a>
                 </h5>
                 <!-- <span>/</span> -->
                 <!-- <h5>
-                    <a href="#" class="text-white no-underline hover:underline">Register</a>
-                </h5> -->
+                        <a href="#" class="text-white no-underline hover:underline">Register</a>
+                    </h5> -->
             </div>
 
             <div class="relative flex items-center p-2">
@@ -49,5 +50,26 @@
                 }
             </div>
         </div>
+        }
+        @if (isUserAuthenticated()) {
+        <div class="relative inline-block text-left">
+            <button (type="button" (click)="toggleDropdown()")
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-white font-medium rounded-md hover:bg-gray-800 transition text-base cursor-pointer">
+                <fa-icon [icon]="faUserCircle" class="text-[1.3rem]"></fa-icon>
+                Hi {{ username() }}
+                <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+
+            @if (dropdownVisible) {
+            <div class="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-md border border-gray-200 z-50">
+                <ul class="py-1 text-sm text-gray-700">
+                    <li class="block px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+                </ul>
+            </div>
+            }
+
+        </div>
+        }
+
     </div>
 </div>
