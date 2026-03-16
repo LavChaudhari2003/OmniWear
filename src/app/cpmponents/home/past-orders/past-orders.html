@@ -1,0 +1,57 @@
+<div class="max-2-6xl mx-auto bg-white p-8 h[85vh] overflow-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-6 min-h[600px]">
+            <div class="flex flex-row">
+                <label class="block text-lg font-semibold mb-2 text-gray-800">Select Order</label>
+                <select
+                    (change)="selectOrder($event)"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="0" disabled selected>Please select an order</option>
+                    @for (pastOrder of pastOrders(); track $index) {
+                        <option value="{{pastOrder.orderId}}">{{ pastOrder.orderId }} Date: {{ pastOrder.orderDate }}</option>
+                    }
+                </select>
+            </div>
+
+            @if (pastOrder()) {     
+                <div class="space-y-6">
+                    <h2 class="text-xl font-semibold text-gray-900">Previous Order Details</h2>
+                    @for (product of pastOrderProducts(); track product) {
+                    <div class="flex">
+                        <div class="flex flex-row sm:flex-col gap-4 items-start bg-gray-50 p-4 rounded-lg">
+                            <img [src]=" '../../../../assets/images/' + product.productImage" alt="Product"
+                                class="w-full sm:w-32 h-32 object-cover rounded-md">
+                        </div>
+                        <div class="flex-1 space-y-1">
+                            <h3 class="text-lg font-medium text-gray-900"> <Strong> {{ product.productName }}</Strong></h3>
+                            <p class="text-sm text-gray-600"><Strong>Price:</Strong> {{ product.price | currency }}</p>
+                            <p class="text-sm text-gray-600"><Strong>Quantity:</Strong> {{ product.qty }}</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+        <div class="space-y-6">
+            <div class="bg-gray-100 p-5 rounded-lg space-y-2 sticky top-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">Delivery Address</h2>
+                <p> <strong>Name:</strong> {{ pastOrder()?.userName }}</p>
+                <p> <strong>Address:</strong> {{ pastOrder()?.address }}</p>
+                <p> <strong>City:</strong> {{ pastOrder()?.city }}</p>
+                <p> <strong>State:</strong> {{ pastOrder()?.state }}</p>
+                <p> <strong>Pin:</strong> {{ pastOrder()?.pin }}</p>
+            </div>
+
+            <div class="bg-gray-100 p-5 rounded-lg space-y-2 sticky top-[380px] mt-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">Order Summary</h2>
+                <p> <strong>Order Date:</strong> {{ pastOrder()?.orderDate }}</p>
+                <p> <strong>Order Total:</strong>  {{ pastOrder()?.total | currency }}</p>
+                <p> <strong>Shipping Cost:</strong> Free</p>
+                <hr>
+                <p> <strong>Total Amount:</strong> {{ pastOrder()?.total | currency }}</p>
+            </div>
+        </div>
+    </div>
+</div>

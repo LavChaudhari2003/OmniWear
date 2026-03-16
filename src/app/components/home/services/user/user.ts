@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoggedInUser, LoginToken, User } from '../../types/user.type';
 import { toObservable } from '@angular/core/rxjs-interop';
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
 
   private isAuthenticated = signal<boolean>(false);
@@ -38,7 +40,6 @@ export class UserService {
   get token(): string {
     return this.authToken;
   }
-
   createUser(user: User): Observable<any> {
     const url = 'http://localhost:5001/users/signup';
     return this.http.post<any>(url, {
@@ -99,7 +100,7 @@ export class UserService {
     }
     return Date.now() < parseInt(expiry, 10);
   }
-
+  
   private setAutoLogoput(expiryTimeInSeconds: number): void {
     this.autoLogoutTimer = setTimeout(() => {
       this.logout();

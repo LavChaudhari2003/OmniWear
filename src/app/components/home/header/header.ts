@@ -79,4 +79,9 @@ export class Header {
     this.router.navigate(['/home/products']);
   }
 
+  navigateToPastOrders(): void {
+    this.router.navigate(['/home/pastorders']);
+  }
+
+
 }

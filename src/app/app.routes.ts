@@ -6,6 +6,8 @@ import { ProductDetails } from './components/home/product-details/product-detail
 import { Cart } from './components/home/cart/cart';
 import { UserSignup } from './cpmponents/home/user/user-signup/user-signup';
 import { UserLogin } from './cpmponents/home/user/user-login/user-login';
+import { PastOrders } from './cpmponents/home/past-orders/past-orders';
+import { authGuard } from './components/home/services/auth-guard';
 
 export const routes: Routes = [
     // {path:'home', component: Home},
@@ -34,6 +36,11 @@ export const routes: Routes = [
             {
                 path:"login",
                 component: UserLogin,
+            },
+            {
+                path:"pastorders",
+                component: PastOrders,
+                canActivate: [authGuard],
             }
         ]
 
