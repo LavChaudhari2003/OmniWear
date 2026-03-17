@@ -109,7 +109,7 @@
       <div
         class="w-full xl:w-[420px] xl:sticky xl:top-6 h-fit bg-gray-50 p-6 rounded-lg shadow-md shrink-0"
       >
-        <form [formGroup]="orderForm()" (ngSubmit)="onSubmit()" class="text-xs md:text-sm">
+        <form [formGroup]="orderForm()"  class="text-xs md:text-sm">
           <h2 class="text-xl md:text-2xl font-bold mb-4">Delivery Address</h2>
 
           <div class="space-y-4">
@@ -171,6 +171,8 @@
             <button
               class="w-full mt-4 bg-gray-900 text-white py-2 text-base md:text-lg font-semibold rounded hover:bg-gray-950 transition cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
               [disabled]="!orderForm().valid || disabledCheckout"
+              type="submit"
+              (click)="checkout()"
             >
               Checkout
             </button>
